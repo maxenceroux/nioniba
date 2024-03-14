@@ -37,10 +37,14 @@ const GameStartScreen = () => {
 
     const newIndex = Math.floor(Math.random() * availableImages.length);
     setRandomImage(availableImages[newIndex]);
-    const correctAnswer = results[`level_${level}`][newIndex + 1];
+    console.log(availableImages[newIndex]);
+    const match = availableImages[newIndex].match(/img(\d+)\.png/)[1];
+    console.log(match);
+
+    const correctAnswer = results[`level_${level}`][match];
     console.log("img" + newIndex + " level" + level);
     console.log("correct answer " + correctAnswer);
-    setIndex(newIndex);
+    setIndex(match);
     const newAvailableImages = availableImages.filter(
       (_, index) => index !== newIndex
     );
@@ -49,7 +53,7 @@ const GameStartScreen = () => {
   };
 
   const handleOptionClick = (option) => {
-    const correctAnswer = results[`level_${level}`][myIndex + 1];
+    const correctAnswer = results[`level_${level}`][myIndex];
     console.log(availableImages);
     if (option === correctAnswer) {
       if (score === 4 && level === 1) {
